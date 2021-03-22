@@ -13,7 +13,7 @@ const userRoutes = require('./routes/user');
 // utilisation du module 'dotenv' pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
 require('dotenv').config();
 
-    mongoose.connect(process.env.DB_ADM, {
+    mongoose.connect(process.env.ADM, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Options pour sécuriser les cookies
+// sécuriser les cookies
 const expiryDate = new Date(Date.now() + 3600000); // 1 heure (60 * 60 * 1000)
 app.use(session({
   name: 'session',

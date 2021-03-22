@@ -9,7 +9,7 @@ const MIME_TYPES = {
   'image/png': 'png'
 };
 
-// On crée un objet de configuration pour préciser à multer où enregistrer les fichiers images et les renommer
+// Création un objet de configuration pour préciser à multer où enregistrer les fichiers images et les renommer
 const storage = multer.diskStorage({
 
   // On mets la destination d'enregistrement des images

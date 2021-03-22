@@ -83,10 +83,11 @@ exports.getAllSauce = (req, res, next) => {
         }
     );
 };
-// "liker"ou "dislaker" une sauce
+
+// "like"ou "dislike" une sauce
 
 exports.likeDislike = (req, res, next) => {
-    // Pour la route READ = Ajout/suppression d'un like / dislike à une sauce
+    
     // Like présent dans le body
     let like = req.body.like
     // On prend le userID
@@ -94,7 +95,7 @@ exports.likeDislike = (req, res, next) => {
     // On prend l'id de la sauce
     let sauceId = req.params.id
   
-    if (like === 1) { // Si il s'agit d'un like
+    if (like === 1) { // like
       Sauce.updateOne({
           _id: sauceId
         }, {
@@ -114,7 +115,7 @@ exports.likeDislike = (req, res, next) => {
         }))
     }
     if (like === -1) {
-      Sauce.updateOne( // S'il s'agit d'un dislike
+      Sauce.updateOne( // dislike
           {
             _id: sauceId
           }, {
@@ -135,12 +136,12 @@ exports.likeDislike = (req, res, next) => {
           error
         }))
     }
-    if (like === 0) { // Si il s'agit d'annuler un like ou un dislike
+    if (like === 0) { // annuler un like ou un dislike
       Sauce.findOne({
           _id: sauceId
         })
         .then((sauce) => {
-          if (sauce.usersLiked.includes(userId)) { // Si il s'agit d'annuler un like
+          if (sauce.usersLiked.includes(userId)) { // annuler un like
             Sauce.updateOne({
                 _id: sauceId
               }, {
@@ -158,7 +159,7 @@ exports.likeDislike = (req, res, next) => {
                 error
               }))
           }
-          if (sauce.usersDisliked.includes(userId)) { // Si il s'agit d'annuler un dislike
+          if (sauce.usersDisliked.includes(userId)) { // annuler un dislike
             Sauce.updateOne({
                 _id: sauceId
               }, {
