@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const path = require ('path');
 
 const helmet = require('helmet');
-const session = require('cookie-session');
 const nocache = require('nocache');
 
 const sauceRoutes = require('./routes/sauce');
@@ -32,22 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// sécuriser les cookies
-const expiryDate = new Date(Date.now() + 3600000); // 1 heure (60 * 60 * 1000)
-app.use(session({
-  name: 'session',
-  keys: ['key1', 'key2'],
-  secret: process.env.SEC_SES,
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    domain: 'http://localhost:3000',
-    expires: expiryDate
-  }
-}));
-
 app.use(bodyParser.json());
-
 
 // Sécuriser Express en définissant divers en-têtes HTTP - https://www.npmjs.com/package/helmet#how-it-works
 // On utilise helmet pour plusieurs raisons notamment la mise en place du X-XSS-Protection afin d'activer le filtre de script intersites(XSS) dans les navigateurs web
