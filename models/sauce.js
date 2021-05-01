@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sanitizerPlugin = require('mongoose-sanitizer-plugin');
 
 const sauceSchema = mongoose.Schema({
   // UserId du createur
@@ -54,5 +55,7 @@ const sauceSchema = mongoose.Schema({
   },
 })
 
+// Plugin qui purifie les champs avant de les enregistrer dans la base de donnée.
+sauceSchema.plugin(sanitizerPlugin);
 
 module.exports = mongoose.model('Sauce', sauceSchema);
